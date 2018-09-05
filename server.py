@@ -1,8 +1,10 @@
 from sanic import Sanic, response
 from sanic.response import json
 from os.path import dirname, abspath, join
+from ar_model_client import ZatiqARModelClient
 
 _CURDIR = dirname(abspath(__file__))
+zatiq_ar_model_client = ZatiqARModelClient()
 
 app = Sanic()
 app.static('', join(_CURDIR, 'ARModels' ))
@@ -14,6 +16,14 @@ async def test(request):
 @app.route('/file')
 async def handle_request(request):
     return await response.file_stream(join(_CURDIR, 'ARModels/Caramilk', 'Caramilk_revised.htm'))
+
+@app.route('/upload/', methods=['POST'])
+async def upload_ar_model(request):
+    if 'ar_model_zip' not in request.files:
+        return response.json({'message': "Error! No AR Model zip was uploaded!"})
+    else:
+        ar_model_zip = request.files.get('ar_model_zip')
+        return await zatiq_ar_model_client.save_ar_model_locally(ar_model_zip)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)
