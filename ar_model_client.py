@@ -26,7 +26,7 @@ class ZatiqARModelClient(object):
         
         unique_dir_name = self.generate_unique_folder_name()
 
-        zip_ref = zipfile.ZipFile(open(ar_model_zip, 'rb'), 'r')
+        zip_ref = zipfile.ZipFile(ar_model_zip, 'r')
         await zip_ref.extractall(join(_CURDIR, "ARModels"+unique_dir_name))
         zip_ref.close()
 
