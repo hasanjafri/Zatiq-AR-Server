@@ -26,7 +26,6 @@ class ZatiqARModelClient(object):
         
         unique_dir_name = self.generate_unique_folder_name()
 
-        print(ar_model_zip.__dict__)
         print('yoyo')
         print(dir(ar_model_zip))
 
