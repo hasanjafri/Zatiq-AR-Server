@@ -3,6 +3,7 @@ import zipfile
 from os.path import dirname, abspath, join, isdir, exists
 from uuid import uuid4
 import glob
+import io
 
 _CURDIR = dirname(abspath(__file__))
 
@@ -26,9 +27,9 @@ class ZatiqARModelClient(object):
         
         unique_dir_name = self.generate_unique_folder_name()
 
-        print(ar_model_zip)
+        #print(ar_model_zip)
 
-        zip_ref = zipfile.ZipFile(ar_model_zip, 'rb')
+        zip_ref = zipfile.ZipFile(io.BytesIO(ar_model_zip))
         await zip_ref.extractall(join(_CURDIR, "ARModels"+unique_dir_name))
         zip_ref.close()
 
