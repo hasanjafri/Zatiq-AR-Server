@@ -13,9 +13,9 @@ app.static('', join(_CURDIR, 'ARModels' ))
 async def test(request):
     return json({"hello": "world"})
 
-@app.route('/file')
+@app.route('/Model/<folder>/<index__file>')
 async def handle_request(request):
-    return await response.file_stream(join(_CURDIR, 'ARModels/Caramilk', 'Caramilk_revised.htm'))
+    return await response.file_stream(join(_CURDIR, 'ARModels/'+str(folder), index_file))
 
 @app.route('/upload/', methods=['POST'])
 async def upload_ar_model(request):
