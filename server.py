@@ -41,7 +41,7 @@ async def upload_ar_model(request):
     print(zip_files.name)
 
     if username == admin_username and password == admin_password:
-        return await zatiq_ar_model_client.save_ar_model_locally(zip_files)
+        return await zatiq_ar_model_client.save_ar_model_locally(zip_files.body)
     else:
         return response.json({'message': 'Error! Invalid admin credentials!'})
 
