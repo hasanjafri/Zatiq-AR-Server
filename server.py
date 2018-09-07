@@ -36,7 +36,7 @@ async def upload_ar_model(request):
     username = request.form.get('username')
     password = request.form.get('password')
 
-    zip_files = request.files['file']
+    zip_files = request.files['file'].read()
 
     if username == admin_username and password == admin_password:
         return await zatiq_ar_model_client.save_ar_model_locally(zip_files)
