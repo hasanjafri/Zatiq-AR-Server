@@ -29,7 +29,7 @@ class ZatiqARModelClient(object):
         #print(ar_model_zip)
         #print(zipfile.is_zipfile(ar_model_zip))
 
-        zip_ref = zipfile.ZipFile(ar_model_zip.read())
+        zip_ref = zipfile.ZipFile(ar_model_zip)
         #with zipfile.ZipFile(ar_model_zip, 'r') as zip_ref:
         await zip_ref.extractall(join(_CURDIR, "ARModels"+unique_dir_name))
         zip_ref.close()
