@@ -22,7 +22,7 @@ async def upload_ar_model(request):
     if 'ar_model_zip' not in request.files:
         return response.json({'message': "Error! No AR Model zip was uploaded!"})
     else:
-        ar_model_zip = request.files.get('ar_model_zip')
+        ar_model_zip = request.files['ar_model_zip']
         return await zatiq_ar_model_client.save_ar_model_locally(ar_model_zip)
 
 if __name__ == "__main__":

@@ -3,7 +3,6 @@ import zipfile
 from os.path import dirname, abspath, join, isdir, exists
 from uuid import uuid4
 import glob
-import io
 
 _CURDIR = dirname(abspath(__file__))
 
@@ -30,10 +29,10 @@ class ZatiqARModelClient(object):
         #print(ar_model_zip)
         #print(zipfile.is_zipfile(ar_model_zip))
 
-        #zip_ref = zipfile.ZipFile(io.BytesIO(ar_model_zip))
-        with zipfile.ZipFile(ar_model_zip, 'r') as zip_ref:
-            await zip_ref.extractall(join(_CURDIR, "ARModels"+unique_dir_name))
-            zip_ref.close()
+        zip_ref = zipfile.ZipFile(ar_model_zip)
+        #with zipfile.ZipFile(ar_model_zip, 'r') as zip_ref:
+        await zip_ref.extractall(join(_CURDIR, "ARModels"+unique_dir_name))
+        zip_ref.close()
 
         #if exists(join(_CURDIR, 'ARModels'+unique_dir_name, ar_model_zip.name+'.htm'))            
         htm_file = glob.glob(join(_CURDIR, 'ARModels'+unique_dir_name+'*.htm'))
