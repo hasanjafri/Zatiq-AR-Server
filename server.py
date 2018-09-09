@@ -14,7 +14,7 @@ app.static('', join(_CURDIR, 'ARModels' ))
 async def test(request):
     return json({"hello": "world"})
 
-@app.route('/Model/<folder>/<index__file>')
+@app.route('/Model/<folder>/<index__file>', methods=['GET'])
 async def handle_request(request):
     return await response.file_stream(join(_CURDIR, 'ARModels/'+str(folder), index_file))
 
